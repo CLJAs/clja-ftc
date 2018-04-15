@@ -37,7 +37,7 @@ def imprimir_resultados_de_camino(clja, cf):
 # *********************************************************************************************************************
 
 
-cljapnn1 = CljaPNN(ele=4, hr=0, previos=["vacio", "yogurB"], compuesta=False)
+cljapnn1 = CljaPNN(ele=2, hr=0, previos=["vacio", "yogurB"], compuesta=False)
 cljapnn2 = CljaPNN(ele=2, hr=1, previos=["vacio", "yogurB"], compuesta=False)
 
 
@@ -46,7 +46,7 @@ w = 1
 print(informacion_clja(cljapnn1, "CLJAPNN1: "))
 print(informacion_clja(cljapnn2, "CLJAPNN2: "))
 
-print("\nNIVEL 1:")
+print("\nNIVEL 1: ****************************************************************************************************")
 print("CLJAPNN1: " + imprimir_resultados_de_camino(cljapnn1, CaminoFinito("{0}")))
 print("CLJAPNN2: " + imprimir_resultados_de_camino(cljapnn2, CaminoFinito("{0}", dr=1)))
 print("CLJAPNN2: " + imprimir_resultados_de_camino(cljapnn2, CaminoFinito("{0}", dr=0)) + "\n")
@@ -59,15 +59,21 @@ print("CLJAPNN1: " + imprimir_resultados_de_camino(cljapnn1, CaminoFinito("{2}")
 print("CLJAPNN2: " + imprimir_resultados_de_camino(cljapnn2, CaminoFinito("{2}", dr=1)))
 print("CLJAPNN2: " + imprimir_resultados_de_camino(cljapnn2, CaminoFinito("{2}", dr=0)) + "\n")
 
-print(imprimir_resultados_de_camino(cljapnn1, CaminoFinito("{3}")))
 
-print("\nNIVEL 2:")
-print(imprimir_resultados_de_camino(cljapnn1, CaminoFinito("{2,3}")))
+print("CLJAPNN1: " + imprimir_resultados_de_camino(cljapnn1, CaminoFinito("{3}")))
+print("CLJAPNN2: " + imprimir_resultados_de_camino(cljapnn2, CaminoFinito("{3}", dr=1)))
+print("CLJAPNN2: " + imprimir_resultados_de_camino(cljapnn2, CaminoFinito("{3}", dr=0)) + "\n")
+
+print("\nNIVEL 2: ****************************************************************************************************")
+print("CLJAPNN1: " + imprimir_resultados_de_camino(cljapnn1, CaminoFinito("{2,3}")))
+print("CLJAPNN2: " + imprimir_resultados_de_camino(cljapnn2, CaminoFinito("{2,3}", dr=1)))
+print("CLJAPNN2: " + imprimir_resultados_de_camino(cljapnn2, CaminoFinito("{2,3}", dr=0)) + "\n")
+
 print(imprimir_resultados_de_camino(cljapnn1, CaminoFinito("{2,4}")))
 print(imprimir_resultados_de_camino(cljapnn1, CaminoFinito("{2,5}")))
 print(imprimir_resultados_de_camino(cljapnn1, CaminoFinito("{2,6}")))
 
-print("\nNIVEL 3:")
+print("\nNIVEL 3: ****************************************************************************************************")
 print(imprimir_resultados_de_camino(cljapnn1, CaminoFinito("{2,5,6}")))
 print(imprimir_resultados_de_camino(cljapnn1, CaminoFinito("{2,5,7}")))
 print(imprimir_resultados_de_camino(cljapnn1, CaminoFinito("{2,5,8}")))
@@ -75,7 +81,7 @@ print(imprimir_resultados_de_camino(cljapnn1, CaminoFinito("{2,5,9}")))
 print(imprimir_resultados_de_camino(cljapnn1, CaminoFinito("{2,5,10}")))
 print(imprimir_resultados_de_camino(cljapnn1, CaminoFinito("{2,5,11}")))
 
-print("\nNIVEL 4:")
+print("\nNIVEL 4: ****************************************************************************************************")
 print(imprimir_resultados_de_camino(cljapnn1, CaminoFinito("{2,5,11,12}")))
 print(imprimir_resultados_de_camino(cljapnn1, CaminoFinito("{2,5,11,13}")))
 print(imprimir_resultados_de_camino(cljapnn1, CaminoFinito("{2,5,11,14}")))
