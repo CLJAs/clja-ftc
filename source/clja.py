@@ -51,11 +51,14 @@ print("CLJAPNN1: " + imprimir_resultados_de_camino(cljapnn1, CaminoFinito("{0}")
 print("CLJAPNN2: " + imprimir_resultados_de_camino(cljapnn2, CaminoFinito("{0}", dr=1)))
 print("CLJAPNN2: " + imprimir_resultados_de_camino(cljapnn2, CaminoFinito("{0}", dr=0)) + "\n")
 
-print("CLJAPNN!: " + imprimir_resultados_de_camino(cljapnn1, CaminoFinito("{1}")))
+print("CLJAPNN1: " + imprimir_resultados_de_camino(cljapnn1, CaminoFinito("{1}")))
 print("CLJAPNN2: " + imprimir_resultados_de_camino(cljapnn2, CaminoFinito("{1}", dr=1)))
 print("CLJAPNN2: " + imprimir_resultados_de_camino(cljapnn2, CaminoFinito("{1}", dr=0)) + "\n")
 
-print(imprimir_resultados_de_camino(cljapnn1, CaminoFinito("{2}")))
+print("CLJAPNN1: " + imprimir_resultados_de_camino(cljapnn1, CaminoFinito("{2}")))
+print("CLJAPNN2: " + imprimir_resultados_de_camino(cljapnn2, CaminoFinito("{2}", dr=1)))
+print("CLJAPNN2: " + imprimir_resultados_de_camino(cljapnn2, CaminoFinito("{2}", dr=0)) + "\n")
+
 print(imprimir_resultados_de_camino(cljapnn1, CaminoFinito("{3}")))
 
 print("\nNIVEL 2:")
