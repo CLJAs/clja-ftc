@@ -81,7 +81,7 @@ print(imprimir_resultados_de_camino(cljapnn1, CaminoFinito("{2,5,9}")))
 print(imprimir_resultados_de_camino(cljapnn1, CaminoFinito("{2,5,10}")))
 print(imprimir_resultados_de_camino(cljapnn1, CaminoFinito("{2,5,11}")))
 
-print("\nNIVEL 4: ****************************************************************************************************")
+print("\nNIVEL 4: ***************************************************************************************************")
 print(imprimir_resultados_de_camino(cljapnn1, CaminoFinito("{2,5,11,12}")))
 print(imprimir_resultados_de_camino(cljapnn1, CaminoFinito("{2,5,11,13}")))
 print(imprimir_resultados_de_camino(cljapnn1, CaminoFinito("{2,5,11,14}")))
