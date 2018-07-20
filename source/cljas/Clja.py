@@ -4,14 +4,17 @@
 __author__ = 'Juan Carlos Caso Alonso'
 __project__ = 'clja'
 
+from source.ExcepcionesClja.CljaError import CljaError
+
 
 class Clja(object):
 
-    def __init__(self, L=1, hr=0, previos=None,  compuesta=False):
+    def __init__(self, L=1, hr=0, previos=[], compuesta=False, clja_hash_value=-1):
         self.L = L
         self.huecos_rojos = hr
         self.compuesta = compuesta
         self.previos = previos
+        self.__clja_hash_value = clja_hash_value
 
     def tbhik(self, camino, nivel, k_bolas):
         pass
@@ -28,6 +31,9 @@ class Clja(object):
     def etiqueta_del_hueco(self, posicion):
         pass
 
+    def check_cf(self, camino):
+        pass
+
     # PROPERTIES:
 
     def set_L(self, nuevo_valor):
@@ -42,3 +48,15 @@ class Clja(object):
     def set_huecos_rojos(self, nuevo_valor):
         self.huecos_rojos = nuevo_valor
 
+    def _set_clja_hash_value(self, new_value):
+        self.__hash_value = new_value
+
+    def _get_clja_hash_value(self):
+        return self.__clja_hash_value
+
+    clja_hash_value = property (_get_clja_hash_value, _set_clja_hash_value)
+
+    def __hash__(self):
+        if self.clja_hash_value == -1:
+            raise CljaError("Se consulta el valor hash y todavía no se ha definido: ahora es -1, indefinido")
+        return self.clja_hash_value

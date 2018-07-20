@@ -3,6 +3,7 @@
 
 import sys
 from source.cljas.CljaPNN import CljaPNN
+from source.cljas.clja_ftc.CljaFtc import CljaFtc
 from source.conjuntos.camino_finito.CaminoFinito import CaminoFinito
 
 
@@ -37,10 +38,9 @@ def imprimir_resultados_de_camino(clja, cf):
 # *********************************************************************************************************************
 
 
+#clja_ftc = CljaFtc()
 cljapnn1 = CljaPNN(ele=2, hr=0, previos=["vacio", "yogurB"], compuesta=False)
 cljapnn2 = CljaPNN(ele=2, hr=1, previos=["vacio", "yogurB"], compuesta=False)
-
-
 
 w = 1
 print(informacion_clja(cljapnn1, "CLJAPNN1: "))
@@ -58,7 +58,6 @@ print("CLJAPNN2: " + imprimir_resultados_de_camino(cljapnn2, CaminoFinito("{1}",
 print("CLJAPNN1: " + imprimir_resultados_de_camino(cljapnn1, CaminoFinito("{2}")))
 print("CLJAPNN2: " + imprimir_resultados_de_camino(cljapnn2, CaminoFinito("{2}", dr=1)))
 print("CLJAPNN2: " + imprimir_resultados_de_camino(cljapnn2, CaminoFinito("{2}", dr=0)) + "\n")
-
 
 print("CLJAPNN1: " + imprimir_resultados_de_camino(cljapnn1, CaminoFinito("{3}")))
 print("CLJAPNN2: " + imprimir_resultados_de_camino(cljapnn2, CaminoFinito("{3}", dr=1)))
@@ -93,6 +92,53 @@ print(imprimir_resultados_de_camino(cljapnn1, CaminoFinito("{2,5,11,19}")))
 print(imprimir_resultados_de_camino(cljapnn1, CaminoFinito("{2,5,11,20}")))
 print(imprimir_resultados_de_camino(cljapnn1, CaminoFinito("{2,5,11,21}")))
 
+CF1= CaminoFinito("{35,39}", dr=1)
+CF2= CaminoFinito("{0}", dr=0)
+
+cljapnn1 = CljaPNN(ele=1, hr=1, previos=["vacio","yogurB"], compuesta=False)
+cljapnn2 = CljaPNN(ele=1, hr=0, compuesta=True)
+print("\n CAMBIO DE TEST \n")
+print(informacion_clja(cljapnn1, "CLJAPNN1 NUEVA: "))
+print(informacion_clja(cljapnn2, "CLJAPNN2 NUEVA: "))
+
+resultado2 = cljapnn2.flja(1, CF2)
+resultado = cljapnn1.flja(resultado2, CF1)
+
+print("\nPRUEBA 1 DEL DIARIO VOL II: ", resultado)
+print(imprimir_resultados_de_camino(cljapnn2, CF2))
+print(imprimir_resultados_de_camino(cljapnn1, CF1))
+
+CF1= CaminoFinito("{218}", dr=1)
+CF2= CaminoFinito("{25,27,28,29}", dr=0)
+
+cljapnn1 = CljaPNN(ele=1, hr=1, previos=["vacio","yogurB"], compuesta=False)
+cljapnn2 = CljaPNN(ele=1, hr=0, compuesta=True)
+
+resultado2 = cljapnn2.flja(1, CF2)
+resultado = cljapnn1.flja(resultado2, CF1)
+
+print("\nPRUEBA 2  DEL DIARIO VOL II: ", resultado)
+print(imprimir_resultados_de_camino(cljapnn2, CF2))
+print(imprimir_resultados_de_camino(cljapnn1, CF1))
+
+CF1= CaminoFinito("{4,5}", dr=0)
+CF2= CaminoFinito("{25,27,28,29}", dr=0)
+
+cljapnn1 = CljaPNN(ele=1, hr=1, previos=["vacio","yogurB"], compuesta=False)
+#cljapnn2 = CljaPNN(ele=1, hr=0, compuesta=True)
+
+#resultado2 = cljapnn2.flja(1, CF2)
+resultado = cljapnn1.flja(1, CF1)
+
+print("\nPRUEBA 3  DEL DIARIO VOL II: ", resultado)
+
+# print(imprimir_resultados_de_camino(cljapnn2, CF2))
+print(imprimir_resultados_de_camino(cljapnn1, CF1))
+
+cljapnn1 = CljaPNN(ele=1, hr=0, previos=[], compuesta=False)
+CF1= CaminoFinito("{5025,5026,5027,5028,5029,5030,5031,5032,5033,5034,5035,5036}", dr=0)
+CF2= CaminoFinito("{25,27,28,29}", dr=0)
+print(imprimir_resultados_de_camino(cljapnn1, CF1))
 
 
 """

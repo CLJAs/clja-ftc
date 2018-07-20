@@ -1,20 +1,21 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 from source.ExcepcionesClja.CaminoFinitoNoValido import CaminoFinitoNoValido
-from conjuntos.camino_finito import CaminoFinito
+from source.conjuntos.camino_finito.CaminoFinito import CaminoFinito
 
 __author__ = 'Juan Carlos Caso Alonso'
 __project__ = 'clja'
 
-from cljas.Clja import Clja
+from source.cljas.Clja import Clja
 import math
 from source.ExcepcionesClja.PosibleErrorDePrecision import PosibleErrorDePrecision
+from source.ExcepcionesClja.CaminoFinitoNoValido import CaminoFinitoNoValido
 
 
 class CljaPNN(Clja):
 
-    def __init__(self, ele=1, hr=0, previos=[],  compuesta=False):
-        Clja.__init__(self, ele, hr, previos, compuesta)
+    def __init__(self, ele=1, hr=0, previos=[],  compuesta=False, clja_hash_value=-1):
+        Clja.__init__(self, ele, hr, previos, compuesta, clja_hash_value)
 
 
     """ Cantidad de bolas necesarias para que por el hueco, de ese nivel del camino, pase la primera bola"""
@@ -98,7 +99,7 @@ class CljaPNN(Clja):
                     )
                 )
                 # lista_etiquetas_huecos.append(int(ese))
-                return [1, CaminoFinito.CaminoFinito(lista_etiquetas_huecos)]
+                return [1, CaminoFinito(lista_etiquetas_huecos)]
             # S tiene decimales, no es una bolita de primer hueco.
             else:
                 posicion_del_hueco_de_este_nivel = total_de_bolas_en_este_nivel - (((ese + 1) * ese) // 2)
@@ -115,7 +116,7 @@ class CljaPNN(Clja):
                 else:
                     # El hueco tiene emparejadas L bolas, y nos quedan las mismas o menos, hemos acabado.
                     doble_uve = (ese + 1 - posicion_del_hueco_de_este_nivel + 1)
-                    return [int(doble_uve), CaminoFinito.CaminoFinito(lista_etiquetas_huecos)]
+                    return [int(doble_uve), CaminoFinito(lista_etiquetas_huecos)]
 
     # TODO:
     """
@@ -129,7 +130,11 @@ class CljaPNN(Clja):
     TRUCO: solo interesa saber si tienbe decimales o no, podemos hacer a mano la raíz cuadrada, qeu darnos con el 
     resultado natural y a la primera pista de si va a tener o no decimales... devolvemos una variable boolean, no hace 
     falta calcular tooodooos los decimales del resultado.
+    
+    SOLUCIONADO CON EL METODO:
+    import source.math_clja.MathClja.clja_sqrt (Pero aqui no lo uso. TODO ESTE METODO ESTA DEPRECADO!
     """
+
     @staticmethod
     def ese_mayuscula(total_de_bolas):
         if total_de_bolas > 100000000:
@@ -148,16 +153,32 @@ class CljaPNN(Clja):
     @staticmethod
     def etiqueta_del_hueco_modo_inverso(posicion_del_hueco, lista_etiquetas_hasta_el_momento):
         if len(lista_etiquetas_hasta_el_momento) == 0:
-            etiqueta_anterior = CaminoFinito.CaminoFinito.LAMBDA_CERO
+            etiqueta_anterior = CaminoFinito.LAMBDA_CERO
         else:
             etiqueta_anterior = lista_etiquetas_hasta_el_momento[len(lista_etiquetas_hasta_el_momento) - 1]
         return etiqueta_anterior + posicion_del_hueco
 
+    def check_cf(self, camino_a_chequear):
+        if not isinstance(camino_a_chequear, CaminoFinito):
+            raise CaminoFinitoNoValido("La Clja y le  tipo de CaminoFinito no son compatibles.")
+
+    def informacion_clja(self, nombre="CLJAPNN: "):
+        cadena = nombre + " L=" + str(self.L) + \
+                 " HR=" + str(self.get_huecos_rojos()) + \
+                 " Previos=" + str(self.previos) + \
+                 " CardinalPrevios=" + str(len(self.previos)) + \
+                 " Compuesta=" + str(self.compuesta)
+        return cadena
+
+    def __str__(self):
+        return self.informacion_clja()
+
 
 if __name__ == "__main__":
-    clja_xa_iterar = CljaPNN(1, 0)
+
+    clja_xa_iterar = CljaPNN(ele=1, hr=0)
     camino_mas_largo = CaminoFinito({0})
-    for i in range(0, 100000):
+    for i in range(0, 1000):
         [w, camino] = clja_xa_iterar.flja_inversa(i)
         print ("Natural: i: " + str(i) + " -> camino: " + str(camino) + " w: " + str(w))
         if len(camino.lista_coordenadas) > len (camino_mas_largo.lista_coordenadas):
@@ -166,8 +187,8 @@ if __name__ == "__main__":
 
     def prueba_iterada_SF_to_N(la_clja, maximo_elementos):
         for i in range(0, maximo_elementos):
-            lista_etiquetas = range(0, i + 1)
-            camino = CaminoFinito.CaminoFinito(lista_etiquetas)
+            lista_etiquetas = list(range(0, i + 1))
+            camino = CaminoFinito(lista_etiquetas)
             calcular_todos_los_n_de_un_camino(la_clja, camino)
 
     def calcular_todos_los_n_de_un_camino (la_clja, camino):
@@ -182,10 +203,21 @@ if __name__ == "__main__":
         print (mensaje + cadena_w)
 
     prueba_iterada_SF_to_N(clja_xa_iterar, 10)
-    calcular_todos_los_n_de_un_camino(clja_xa_iterar, CaminoFinito.CaminoFinito([309, 325]))
-    calcular_todos_los_n_de_un_camino(clja_xa_iterar, CaminoFinito.CaminoFinito([315, 325, 327]))
-    calcular_todos_los_n_de_un_camino(clja_xa_iterar, CaminoFinito.CaminoFinito([2]))
-    calcular_todos_los_n_de_un_camino(clja_xa_iterar, CaminoFinito.CaminoFinito([1]))
+    calcular_todos_los_n_de_un_camino(clja_xa_iterar, CaminoFinito([309, 325]))
+    calcular_todos_los_n_de_un_camino(clja_xa_iterar, CaminoFinito([315, 325, 327]))
+    calcular_todos_los_n_de_un_camino(clja_xa_iterar, CaminoFinito([2]))
+    calcular_todos_los_n_de_un_camino(clja_xa_iterar, CaminoFinito([1]))
+    calcular_todos_los_n_de_un_camino(clja_xa_iterar, CaminoFinito([5000, 10000, 15000, 20000]))
+    calcular_todos_los_n_de_un_camino(clja_xa_iterar, CaminoFinito([1,2,3,4,5,6,7,8,9,10,11,12, 13, 25]))
+
+    cf = CaminoFinito([1, 2, 3, 4])
+    cf2 = [1,2,3,4]
+    clja2 = Clja()
+    if clja_xa_iterar.check_cf(cf2):
+        print("El camino: ", cf, " concuerda con la Clja: ", clja_xa_iterar.informacion_clja())
+    else:
+        print("El camino: ", cf, " no concuerda con la Clja: ", clja_xa_iterar.informacion_clja())
+
 
 
 

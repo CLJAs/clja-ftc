@@ -25,7 +25,6 @@ list, seguimos el camino finito qeu nos lleva al nodo que representa un subconju
 """
 
 from source.ExcepcionesClja.CaminoFinitoNoValido import CaminoFinitoNoValido
-import cljas.CljaPNN
 
 
 class CaminoFinito(object):
@@ -105,15 +104,17 @@ class CaminoFinito(object):
     def _set_lista_coordenadas(self, nuevo_camino):
         if isinstance(nuevo_camino, str):
             self.__lista_coordenadas = self._convertir_a_lista(nuevo_camino)
-        if isinstance(nuevo_camino, list):
+        elif isinstance(nuevo_camino, list):
             self.__lista_coordenadas = nuevo_camino
-        if isinstance(nuevo_camino, set):
+        elif isinstance(nuevo_camino, set):
             lista = list(nuevo_camino)
             """ 
             Al pasar de un set a un list, los elementos vienen en orden, si no, checker petará
             new comment: ...y vaya que si petaba... de ahí el "sorted"
             """
             self.__lista_coordenadas = sorted(lista)
+        else:
+            raise CaminoFinitoNoValido("La lista de lambdas no es de ningún tipo admitido")
         self._checker()
         if self.lista_coordenadas[0] != self.LAMBDA_CERO: #LAMBDA_CERO = -1
             self.__lista_coordenadas.insert(0, self.LAMBDA_CERO)
@@ -147,7 +148,8 @@ class CaminoFinito(object):
         return True
 
     def __hash__(self):
-        aux = cljas.CljaPNN.CljaPNN(1, 0)
+        from source.cljas.CljaPNN import CljaPNN
+        aux = CljaPNN(ele=1, hr=0, previos=[], compuesta=False, dr=self.dr)
         resultado = aux.flja(1, self)
         return resultado
 
