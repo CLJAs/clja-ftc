@@ -36,7 +36,7 @@ def mostrar_un_resultado_inverso(clja, numero_natural, test_de_fallo=False, fall
         cadena_resultado += " Es un miembro de previos."
     print(cadena_resultado)
 
-
+#TODO: Estas segunda version es mejor, hay que borrar la de arriba
 def mostrar_un_resultado_inverso_V2_to_file (clja, numero_natural, test_de_fallo=False, falla_en=9978):
     valor = numero_natural
     w_inverso, camino_inverso = clja.flja_inversa(valor)
@@ -233,7 +233,7 @@ def prueba_a_fichero(inicio, final):
     fichero.close()
 
 #********** EJECUCION DEL TEST *************************
-prueba_sin_fichero(0,60000)
+prueba_sin_fichero(1,60000)
 #*******************************************************
 
 
