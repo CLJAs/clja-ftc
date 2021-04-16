@@ -1,6 +1,5 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
-from source.ExcepcionesClja.CaminoFinitoNoValido import CaminoFinitoNoValido
 from source.conjuntos.camino_finito.CaminoFinito import CaminoFinito
 
 __author__ = 'Juan Carlos Caso Alonso'
@@ -10,13 +9,13 @@ from source.cljas.Clja import Clja
 import math
 from source.ExcepcionesClja.PosibleErrorDePrecision import PosibleErrorDePrecision
 from source.ExcepcionesClja.CaminoFinitoNoValido import CaminoFinitoNoValido
+from source.math_clja.MathClja import MathClja
 
 
 class CljaPNN(Clja):
 
     def __init__(self, ele=1, hr=0, previos=[],  compuesta=False, clja_hash_value=-1):
         Clja.__init__(self, ele, hr, previos, compuesta, clja_hash_value)
-
 
     """ Cantidad de bolas necesarias para que por el hueco, de ese nivel del camino, pase la primera bola"""
     def b1(self, camino, nivel):
@@ -35,6 +34,10 @@ class CljaPNN(Clja):
                        (k_bolas - 1)
                    ) // 2
         return resultado
+
+    def tbhik2(self, camino, nivel, k_bolas):
+        pass
+
 
     def posicion_de_hueco(self, camino, posicion_etiqueta):
         etiqueta = camino.lista_coordenadas[posicion_etiqueta]
@@ -161,6 +164,37 @@ class CljaPNN(Clja):
     def check_cf(self, camino_a_chequear):
         if not isinstance(camino_a_chequear, CaminoFinito):
             raise CaminoFinitoNoValido("La Clja y le  tipo de CaminoFinito no son compatibles.")
+    # *********************************************************************************************
+    # FLJA INVERSA COMPUESTA PARAMETRIZADA
+    # *********************************************************************************************
+
+    # UB1I:Última posición de hueco con bola k=1 (B1 en la version directa) a la que se llega con esa cantidad de bolas:
+    # Necesito aproximación tipo floor() y saber si el resultado tiene o no decimales, solo eso.
+    # Por eso la raiz cuadrada y la división vienen acompañadas de tanto chequeo.
+    # El resultado de la raiz pupede ser impar y la divison entera crear un decimal...
+
+    def funcion_ub1i(self, total_de_bolas):
+        raiz, exacta = MathClja.clja_sqrt((1 + (8 * total_de_bolas)))
+        resultado_aprox = (raiz - 1) // 2
+        if not exacta:
+            return resultado_aprox, exacta
+        # exacta == True
+        else:
+            if resultado_aprox * 2 != (raiz - 1):
+                return resultado_aprox, False
+            else:
+                return resultado_aprox, True
+
+    def nw_inversa(self, natural):
+        return natural - len(self.previos) + 1
+
+    # Devuelve la cantidad de bolas necesarias en esa habitación para llegar a k=1 en la pos ub1i
+    def b1_inversa (self, pos_del_ultimo_b1):
+        return int(((pos_del_ultimo_b1 + 1) * pos_del_ultimo_b1) // 2)
+
+    # *****************************************
+    # metodos utiles:
+    # *****************************************
 
     def informacion_clja(self, nombre="CLJAPNN: "):
         cadena = nombre + " L=" + str(self.L) + \
@@ -213,10 +247,15 @@ if __name__ == "__main__":
     cf = CaminoFinito([1, 2, 3, 4])
     cf2 = [1,2,3,4]
     clja2 = Clja()
+    """
+
     if clja_xa_iterar.check_cf(cf2):
         print("El camino: ", cf, " concuerda con la Clja: ", clja_xa_iterar.informacion_clja())
     else:
         print("El camino: ", cf, " no concuerda con la Clja: ", clja_xa_iterar.informacion_clja())
+    """
+    for i in range(3, 100):
+        print("[UB1I] El natural era: ", i, " y el resultado ub1i es: ", clja_xa_iterar.funcion_ub1i(i))
 
 
 

@@ -22,7 +22,7 @@ class Clja(object):
     def flja(self, w, lista_de_etiquetas):
         pass
 
-    def flja_inversa(self):
+    def flja_inversa(self, natural):
         pass
 
     def posicion_de_hueco(self, camino, nivel):
@@ -34,6 +34,11 @@ class Clja(object):
     def check_cf(self, camino):
         pass
 
+    def nw_inversa(self, natural):
+        raise CljaError("No deberías llamar nunca a este metodo! <nw_inversa() de la clase abuela>")
+
+    def b1(self, camino, nivel):
+        raise CljaError("No deberías llamar nunca a este metodo! <b1() de la clase abuela>")
     # PROPERTIES:
 
     def set_L(self, nuevo_valor):

@@ -2,14 +2,14 @@
 # -*- coding: utf-8 -*-
 
 import sys
+
 from source.cljas.CljaPNN import CljaPNN
-from source.cljas.clja_ftc.CljaFtc import CljaFtc
 from source.conjuntos.camino_finito.CaminoFinito import CaminoFinito
 
 
 def leer_opciones():
-    print ("Numero de parametros: ", len (sys.argv))
-    print ("Lista de parametros: ", sys.argv)
+    print("Numero de parametros: ", len(sys.argv))
+    print("Lista de parametros: ", sys.argv)
     return 0
 
 
@@ -121,8 +121,8 @@ print("\nPRUEBA 2  DEL DIARIO VOL II: ", resultado)
 print(imprimir_resultados_de_camino(cljapnn2, CF2))
 print(imprimir_resultados_de_camino(cljapnn1, CF1))
 
-CF1= CaminoFinito("{4,5}", dr=0)
-CF2= CaminoFinito("{25,27,28,29}", dr=0)
+CF1 = CaminoFinito("{4,5}", dr=0)
+CF2 = CaminoFinito("{25,27,28,29}", dr=0)
 
 cljapnn1 = CljaPNN(ele=1, hr=1, previos=["vacio","yogurB"], compuesta=False)
 #cljapnn2 = CljaPNN(ele=1, hr=0, compuesta=True)
@@ -135,9 +135,9 @@ print("\nPRUEBA 3  DEL DIARIO VOL II: ", resultado)
 # print(imprimir_resultados_de_camino(cljapnn2, CF2))
 print(imprimir_resultados_de_camino(cljapnn1, CF1))
 
-cljapnn1 = CljaPNN(ele=1, hr=0, previos=[], compuesta=False)
-CF1= CaminoFinito("{5025,5026,5027,5028,5029,5030,5031,5032,5033,5034,5035,5036}", dr=0)
-CF2= CaminoFinito("{25,27,28,29}", dr=0)
+cljapnn1 = CljaPNN(ele=1, hr=1, previos=["vacio", "yogurB"], compuesta=False)
+CF1 = CaminoFinito("{5025,5026,5027,5028,5029,5030,5031,5032,5033,5034,5035,5036}", dr=0)
+CF2 = CaminoFinito("{25,27,28,29}", dr=0)
 print(imprimir_resultados_de_camino(cljapnn1, CF1))
 
 

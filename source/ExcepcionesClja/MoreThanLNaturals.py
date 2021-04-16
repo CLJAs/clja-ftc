@@ -7,10 +7,10 @@ __project__ = 'clja'
 from source.ExcepcionesClja.CljaError import CljaError
 
 
-class PosibleErrorDePrecision (CljaError):
+class MoreThanLNaturals (CljaError):
     def __init__(self, mensaje):
         self.mensaje = mensaje
-        self.AVISO = 'Posible error de precision: '
+        self.AVISO = 'Se ha intentado asociar mas de L naturales'
 
     def __str__(self):
         return self.AVISO + self.mensaje

@@ -1,0 +1,12 @@
+<component name="InspectionProjectProfileManager">
+  <profile version="1.0">
+    <option name="myName" value="Project Default" />
+    <inspection_tool class="PyUnresolvedReferencesInspection" enabled="true" level="WARNING" enabled_by_default="true">
+      <option name="ignoredIdentifiers">
+        <list>
+          <option value="source.arbol_busqueda.arbol_busqueda_pnn.tripleta_hueco_pnn_file.*" />
+        </list>
+      </option>
+    </inspection_tool>
+  </profile>
+</component>

@@ -13,10 +13,10 @@ o formato, pueden haber números repetidos, no estar ordenados... etc...
 from source.ExcepcionesClja.CljaError import CljaError
 
 
-class CaminoFinitoNoValido (CljaError):
+class ExcepcionDeAsignacionIncorrecta (CljaError):
     def __init__(self, mensaje):
         self.mensaje = mensaje
-        self.AVISO = 'Camino finito invalido: '
+        self.AVISO = 'Problema con la relación:'
 
     def __str__(self):
         return self.AVISO + self.mensaje

@@ -44,6 +44,27 @@ class ListaCFsCljaFtc(object):
         else:
             raise ListaCFsNoValida("Error inesperado.")
 
+    def check_lcf2p(self, tipo=FLJA_PRACTICA):
+        if len(self.lista) == 2:
+            this_cf1 = self.lista[0]
+            this_cf2 = self.lista[1]
+            lambdas1 = len(this_cf1.lista_coordenadas)
+            lambdas2 = len(this_cf2.lista_coordenadas)
+            if this_cf1.dr == 1 and this_cf2.dr == 0:
+                if lambdas1 <= lambdas2:
+                    longitud_mas_corta = lambdas1
+                else:
+                    longitud_mas_corta = lambdas2
+                for i in range(0, longitud_mas_corta):
+                    if this_cf1.lista_coordenadas[i] != this_cf2.lista_coordenadas[i]:
+                        return False
+        return True
+
+    def check_lcf1(self):
+        if (len(self.lista) == 1) and (self.lista[0].dr == 0):
+            return True
+        return False
+
     def __clean(self):
         #Borramos todos los caminos después del primero con dr=0
         #Sea práctica o absoluta, después de un dr=0, no hay vida :D.
@@ -72,6 +93,18 @@ class ListaCFsCljaFtc(object):
     def __getitem__(self, item):
         return self.lista[item]
 
+    def __str__(self):
+        cadena = '('
+        if len(self.lista) > 1:
+            cadena += str(self.lista[0])
+            for i in range(1, len(self.lista)):
+                cadena += ", " + str(self.lista[i])
+            cadena += ')'
+        else:
+            if len(self.lista) == 1:
+                cadena += str(self.lista[0]) + ')'
+        return cadena
+
 
 if __name__ == "__main__":
     cf1 = CaminoFinito("{1,2,3,4,5,6}", dr=0)
@@ -81,10 +114,10 @@ if __name__ == "__main__":
 
     lista_cfs_1 = ListaCFsCljaFtc([cf1, cf2], ListaCFsCljaFtc.FLJA_ABSOLUTA)
 
-    #lista_cfs_2 = ListaCFsCljaFtc([cf3])
+    # lista_cfs_2 = ListaCFsCljaFtc([cf3])
     lista_cfs_3 = ListaCFsCljaFtc([cf2, cf1])
-    #lista_cfs_4 = ListaCFsCljaFtc([cf1, cf4])
+    # lista_cfs_4 = ListaCFsCljaFtc([cf1, cf4])
     lista_cfs_5 = ListaCFsCljaFtc([cf1, cf4, cf2])
-    #lista_cfs_6 = ListaCFsCljaFtc([cf1, cf2, cf4])
+    # lista_cfs_6 = ListaCFsCljaFtc([cf1, cf2, cf4])
     lista_cfs_7 = ListaCFsCljaFtc([cf3, cf3, cf3, cf4], ListaCFsCljaFtc.FLJA_ABSOLUTA)
-    #lista_cfs_8 = ListaCFsCljaFtc([cf1, cf2, cf3, cf4], ListaCFsCljaFtc.FLJA_PRACTICA)
+    # lista_cfs_8 = ListaCFsCljaFtc([cf1, cf2, cf3, cf4], ListaCFsCljaFtc.FLJA_PRACTICA)

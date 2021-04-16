@@ -127,6 +127,15 @@ class CaminoFinito(object):
 
     lista_coordenadas = property(_get_lista_coordenadas, _set_lista_coordenadas)
 
+    def show_formato_nkn(self):
+        cadena = "FORMATO NKN:\n"
+        cadena += "{" + str(self.lista_coordenadas[1])
+        for i in range(2, len(self.lista_coordenadas)):
+            cadena += "," + str(self.lista_coordenadas[i] - self.lista_coordenadas[i-1])
+        cadena += "}"
+        cadena += "DR" + str(self.dr)
+        return cadena
+
     def __str__(self):
         # Siempre al menos hay un elemento
         cadena = "{" + str(self.lista_coordenadas[1])
