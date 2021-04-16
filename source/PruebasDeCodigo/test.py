@@ -207,22 +207,35 @@ def formatear_natural (numero, cantidad_digitos):
         cadena = "0" + cadena
     return cadena
 
-cantidad_por_fichero = 1000000
-index_fichero = 200
-contador_de_lineas = 0
-fichero = open("salida_test_" + formatear_natural(index_fichero, cantidad_digitos=5) + ".txt", "w")
 
-for i in range(3, 6547):
-    linea = mostrar_un_resultado_inverso_V2_to_file(clja_ftc1, i, test_de_fallo=False, falla_en=2)
-    fichero.writelines([linea + "\n"])
-    print(linea)
-    contador_de_lineas += 1
-    if contador_de_lineas == cantidad_por_fichero:
-        contador_de_lineas = 0
-        fichero.close()
-        index_fichero += 1
-        fichero = open("salida_test_" + formatear_natural(index_fichero, cantidad_digitos=5) + ".txt", "w")
-fichero.close()
+def prueba_sin_fichero (inicio, final):
+    for i in range(inicio, final):
+        linea = mostrar_un_resultado_inverso_V2_to_file(clja_ftc1, i, test_de_fallo=False, falla_en=2)
+        print(linea)
+
+
+def prueba_a_fichero(inicio, final):
+    cantidad_por_fichero = 1000000
+    index_fichero = 0
+    contador_de_lineas = 0
+    fichero = open("salida_test_" + formatear_natural(index_fichero, cantidad_digitos=5) + ".txt", "w")
+
+    for i in range(inicio, final):
+        linea = mostrar_un_resultado_inverso_V2_to_file(clja_ftc1, i, test_de_fallo=False, falla_en=2)
+        fichero.writelines([linea + "\n"])
+        print(linea)
+        contador_de_lineas += 1
+        if contador_de_lineas == cantidad_por_fichero:
+            contador_de_lineas = 0
+            fichero.close()
+            index_fichero += 1
+            fichero = open("salida_test_" + formatear_natural(index_fichero, cantidad_digitos=5) + ".txt", "w")
+    fichero.close()
+
+#********** EJECUCION DEL TEST *************************
+prueba_sin_fichero(0,60000)
+#*******************************************************
+
 
 for lcf in lista:
     natural = clja_ftc1.flja_absoluta(1, lcf)
