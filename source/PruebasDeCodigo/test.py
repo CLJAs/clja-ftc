@@ -212,7 +212,7 @@ index_fichero = 200
 contador_de_lineas = 0
 fichero = open("salida_test_" + formatear_natural(index_fichero, cantidad_digitos=5) + ".txt", "w")
 
-for i in range(0, 6547):
+for i in range(3, 6547):
     linea = mostrar_un_resultado_inverso_V2_to_file(clja_ftc1, i, test_de_fallo=False, falla_en=2)
     fichero.writelines([linea + "\n"])
     print(linea)
