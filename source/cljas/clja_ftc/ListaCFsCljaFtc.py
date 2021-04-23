@@ -4,7 +4,7 @@
 __author__ = 'Juan Carlos Caso Alonso'
 __project__ = 'clja'
 
-from source.ExcepcionesClja.LsitaCFsNoValida import ListaCFsNoValida
+from source.ExcepcionesClja.ListaCFsNoValida import ListaCFsNoValida
 from source.conjuntos.camino_finito.CaminoFinito import CaminoFinito
 
 
@@ -20,6 +20,7 @@ class ListaCFsCljaFtc(object):
         self.__clean()
 
     def __check_lista(self, tipo):
+        #TODO: revisar esta basura
         if len(self.lista) > 0:
             """
             Cada Clja diferente tiene un método para chequear si un camino es "correcto" para ella.
@@ -29,18 +30,21 @@ class ListaCFsCljaFtc(object):
                     raise ListaCFsNoValida ("Hay un miembro de la lista que no es un CaminoFinito")
             """
 
-            if tipo == self.FLJA_PRACTICA:
-                if len(self.lista) == 1:
-                    if self.lista[0].dr != 0: #Ya se seguro que es un CaminoFinito
-                        raise ListaCFsNoValida("Solo hay un CF y no tiene dr=0")
-                elif (len(self.lista) == 2) or (len(self.lista) == 3):
-                    elem1 = self.lista[0].lista_coordenadas[1]
-                    elem2 = self.lista[len(self.lista) - 1].lista_coordenadas[1]
-                    #Sirve para Lista de 2 CFs y de 3 CFs... pq el CF de en medio(3), puede ser cualquiera!
-                    if not elem1 == elem2:
-                        raise ListaCFsNoValida("No son inicio del mismo SNEI!!")
-                else:
-                    raise ListaCFsNoValida("Es flja PRACTICA y tiene tres o más CFs en la lista")
+            #if tipo == self.FLJA_PRACTICA:
+            if len(self.lista) == 1:
+                if self.lista[0].dr != 0: #Ya se seguro que es un CaminoFinito
+                    raise ListaCFsNoValida("Solo hay un CF y no tiene dr=0")
+            elif (len(self.lista) == 2) and tipo == self.FLJA_PRACTICA:
+                elem1 = self.lista[0].lista_coordenadas[1]
+                elem2 = self.lista[len(self.lista) - 1].lista_coordenadas[1]
+                #Sirve para Lista de 2 CFs y de 3 CFs... pq el CF de en medio(3), puede ser cualquiera!
+                if not elem1 == elem2:
+                    raise ListaCFsNoValida("No son inicio del mismo SNEI!!")
+            elif (len(self.lista) == 2) and tipo == self.FLJA_ABSOLUTA:
+                # Hay dos miembros, pero el primero tiene DR=0
+                pass #No hacer nada, el metodo __clean corta lo que sobra
+            else:
+                raise ListaCFsNoValida("Tiene tres o más CFs en la lista")
         else:
             raise ListaCFsNoValida("Error inesperado.")
 
