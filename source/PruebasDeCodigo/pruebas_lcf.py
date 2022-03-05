@@ -104,7 +104,15 @@ w1, camino_inverso_01 = clja_ftc1.flja_inversa(valor)
 print(str(valor) + " -> " + str(camino_inverso_01))
 
 
+valor = 23271000000
+w1, camino_inverso_01 = clja_ftc1.flja_inversa(valor)
+print("Km:" + str(valor) + " -> " + str(camino_inverso_01))
+
+valor = 14460000000
+w1, camino_inverso_01 = clja_ftc1.flja_inversa(valor)
+print("Miles:" + str(valor) + " -> " + str(camino_inverso_01))
 
 
-
-
+camino_ovejas = CaminoFinito("{435,436,437,438,439}", dr=0)
+lcf_ovejas = ListaCFsCljaFtc([camino_ovejas], tipo_flja=ListaCFsCljaFtc.FLJA_ABSOLUTA)
+print(str(lcf_ovejas) + " -> " + str(clja_ftc1.flja_absoluta(1, lcf_ovejas.lista)))

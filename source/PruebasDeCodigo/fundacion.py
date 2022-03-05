@@ -69,3 +69,37 @@ mostrar_un_resultado_inverso(clja_ftc1, fundacion_prime_5, test_de_fallo=False, 
 
 cat_number = 1093742257065
 mostrar_un_resultado_inverso(clja_ftc1, cat_number, test_de_fallo=False, falla_en=2)
+
+Javiertzo_number = 13875894185
+mostrar_un_resultado_inverso(clja_ftc1, Javiertzo_number, test_de_fallo=False, falla_en=2)
+
+Javiertzo_number2 = 13875894186
+mostrar_un_resultado_inverso(clja_ftc1, Javiertzo_number2, test_de_fallo=False, falla_en=2)
+
+Javiertzo_number2 = 69
+mostrar_un_resultado_inverso(clja_ftc1, Javiertzo_number2, test_de_fallo=False, falla_en=2)
+
+Javiertzo_number2 = 6969
+mostrar_un_resultado_inverso(clja_ftc1, Javiertzo_number2, test_de_fallo=False, falla_en=2)
+
+Javiertzo_number2 = 696969
+mostrar_un_resultado_inverso(clja_ftc1, Javiertzo_number2, test_de_fallo=False, falla_en=2)
+
+Javiertzo_number2 = 69696969
+mostrar_un_resultado_inverso(clja_ftc1, Javiertzo_number2, test_de_fallo=False, falla_en=2)
+Javiertzo_number2 = 6969696969
+mostrar_un_resultado_inverso(clja_ftc1, Javiertzo_number2, test_de_fallo=False, falla_en=2)
+Javiertzo_number2 = 696969696969
+mostrar_un_resultado_inverso(clja_ftc1, Javiertzo_number2, test_de_fallo=False, falla_en=2)
+Javiertzo_number2 = 69696969696969
+mostrar_un_resultado_inverso(clja_ftc1, Javiertzo_number2, test_de_fallo=False, falla_en=2)
+Javiertzo_number2 = 6969696969696969
+mostrar_un_resultado_inverso(clja_ftc1, Javiertzo_number2, test_de_fallo=False, falla_en=2)
+
+#69, 69 times
+
+numero_69 = 69
+for i in range(0, 69):
+    numero_69 = (numero_69 * 100) + 69
+
+mostrar_un_resultado_inverso(clja_ftc1, numero_69, test_de_fallo=False, falla_en=2)
